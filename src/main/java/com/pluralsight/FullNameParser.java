@@ -9,30 +9,31 @@ public class FullNameParser {
 
         System.out.print("Please enter your name: ");
         String fullName = scanner.nextLine().trim();
+        String[] nameParts = fullName.split(" ");
 
-        String[] parts = fullName.split(" ");
-
-        String firstName = parts[0];
-        String middleName = "";
+        String firstName;
+        String middleName;
         String lastName;
 
-        if (parts.length == 3) {
-            middleName = parts[1];
-            lastName = parts[2];
+        if (nameParts.length == 2) {
+            firstName = nameParts[0];
+            middleName = "(none)";
+            lastName = nameParts[1];
+        } else if (nameParts.length == 3) {
+            firstName = nameParts[0];
+            middleName = nameParts[1];
+            lastName = nameParts[2];
         } else {
-            lastName = parts[1];
+            System.out.println("Invalid name format");
+            scanner.close();
+            return;
         }
 
         System.out.println("First name: " + firstName);
-
-        if (middleName.isEmpty()) {
-            System.out.println("Middle name: (none)");
-        } else {
-            System.out.println("Middle name: " + middleName);
-        }
-
+        System.out.println("Middle name: " + middleName);
         System.out.println("Last name: " + lastName);
 
         scanner.close();
     }
 }
+
